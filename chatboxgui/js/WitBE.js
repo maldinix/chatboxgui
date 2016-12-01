@@ -3,21 +3,18 @@ const {Wit, log} = require('node-wit');
 var outp = "default";
 
 function httpGetAsync(myFullUrl, callback) {
-  console.log("Entering \"httpGetAsync\"");
+
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.onreadystatechange = function() {
     if (xmlHttp.readyState == 4){
-      console.log("Entering \"callback\"");
       callback(xmlHttp.responseText,xmlHttp.status);
-      console.log("Exiting \"callback\"");
     };
   };
   xmlHttp.open("GET", myFullUrl, true); // true for asynchronous
   xmlHttp.send(null);
-  console.log("Exiting \"httpGetAsync\"");
 };
 
-function xxprocessJSONText(responseText){
+function jsonThreatAnalysis(responseText){
 
   var obj = JSON.parse(responseText);
 
@@ -48,7 +45,7 @@ function xxprocessJSONText(responseText){
       }
     }
 
-    $('#displayResult').html(`Malware: ${verdict}\nProgram Family: ${bestPrediction}\nConfidence: ${(bad*100).toFixed(1)+"%"}`);
+    $('#displayResult').html(`Malware: ${verdict}\nFamily: ${bestPrediction}\nConfidence: ${(bad*100).toFixed(1)+"%"}`);
 
   } else {
 
@@ -58,27 +55,6 @@ function xxprocessJSONText(responseText){
 
 };
 
-
-
-function saveAsJsonResponseString(jsonData, status)
-{
-  console.log("Entering \"saveAsJsonResponseString\"");
-  outp = JSON.stringify(jsonData);
-  console.log("Outp after stringify: " + outp);
-  console.log("Exiting \"saveAsJsonResponseString\"");
-
-  return;
-}
-
-function traverseJSON(x, level) {
-  if (isArray(x)) {
-    traverseArray(x, level);
-  } else if ((typeof x === 'object') && (x !== null)) {
-    traverseObject(x, level);
-  } else {
-    oput +=  x + ", ";
-  };
-};
 
 const client = new Wit({
   accessToken: '2YVUT2ZS2DHHXWFWNSUNN5TLRQOJ4LPU',

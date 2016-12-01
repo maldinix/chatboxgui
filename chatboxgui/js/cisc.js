@@ -47,7 +47,7 @@ $(document).ready(function () {
     var myHash = $('#enterHash').val();
     var myFullUrl = myUrl + myKey + myCommand + myHash;
 
-    httpGetAsync(myFullUrl, processJSONText);
+    httpGetAsync(myFullUrl, jsonThreatAnalysis);
 
   });
 
@@ -80,61 +80,8 @@ $(document).ready(function () {
 
 
 
-  function httpGetAsync(myFullUrl, callback) {
-
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function() {
-      if (xmlHttp.readyState == 4){
-        callback(xmlHttp.responseText,xmlHttp.status);
-      };
-    };
-    xmlHttp.open("GET", myFullUrl, true); // true for asynchronous
-    xmlHttp.send(null);
-  };
 
 
-  function processJSONText(responseText){
-
-    var obj = JSON.parse(responseText);
-
-    /*Code to Return weather this is Mal/Goodware*/
-    var verdict = "N/A"
-    var good = Number(obj["results"]["predictions"]["detector-0"]["Goodware"]);
-    var bad = Number(obj["results"]["predictions"]["detector-0"]["Malware"]);
-    if ( good > bad ) {
-      verdict = "No";
-    } else {
-      verdict = "Yes";
-    }
-
-    if ( verdict == "Yes") {
-      /*Code to determine the best predition of what this*/
-      var classifications = obj["results"]["predictions"]["classifier-0"];
-      var max = 0.0;
-      var bestPrediction = "N/A";
-
-      for (var key in classifications) {
-        // Does not process a prototype property
-        if (!classifications.hasOwnProperty(key)) continue;
-        var predVal = Number(classifications[key]);
-
-        if (predVal > max) {
-          bestPrediction = key;
-          max = predVal;
-        }
-      }
-
-      $('#displayResult').html(`Malware: ${verdict}
-        </br> Program Family: ${bestPrediction}
-        </br> Confidence: ${(bad*100).toFixed(1)+"%"}`);
-
-    } else {
-
-      $('#displayResult').text(`Malware: ${verdict}`);
-
-    }
-
-  };
 
 
   function buildTable(){
