@@ -14,6 +14,31 @@ function httpGetAsync(myFullUrl, callback) {
   xmlHttp.send(null);
 };
 
+function saveAsJsonResponseString(jsonData) {
+
+  var graph = JSON.parse(jsonData);
+  var buildString = "";
+  var counter = 1;
+  for ( var i = 0; i < graph.result.length; i++) {
+
+    for ( var key in graph.result[i]) {
+
+      buildString += counter + ": " + graph.result[i][key].toString() + "\n";
+
+      counter++;
+    }
+
+  }
+
+
+  $('#displayResult').text(buildString);
+
+  console.log("Outp after stringify: " + outp);
+  console.log("Exiting \"saveAsJsonResponseString\"");
+  return;
+}
+
+
 function jsonThreatAnalysis(responseText){
 
   var obj = JSON.parse(responseText);
@@ -105,14 +130,21 @@ const client = new Wit({
       console.log("Entering \"getRecentThreats\"");
       console.log("outp" + outp);
 
+//      var myUrl = "http://fcas-test.us-east-1.elasticbeanstalk.com";
+//      var myKey = "/devel";
+//      var myCommand = "/threat/analysis/";
+//      var myHash = $('#enterHash').val();
+//      var myFullUrl = myUrl + myKey + myCommand + myHash;
+
+
       var myUrl = "http://fcas-test.us-east-1.elasticbeanstalk.com";
       var myKey = "/devel";
-      var myCommand = "/threat/analysis/";
-      var myHash = $('#enterHash').val();
+      var myCommand = "/threat/list/0/5"
 
-      var myFullUrl = myUrl + myKey + myCommand + myHash;
+      var myFullUrl = myUrl + myKey + myCommand;
 
-      httpGetAsync(myFullUrl, xxprocessJSONText);
+
+      httpGetAsync(myFullUrl, saveAsJsonResponseString);
       // set context to result of request
       context.threats = outp;
 
