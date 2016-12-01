@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Cyber 20/20 Chatbot</title>
+
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript" src="./js/WitBE.js" ></script>
+	<script type="text/javascript" src="./js/cisc.js"></script>
+	<script type="text/javascript" src="./libraries/jquery.mousewheel-min.js"></script>
+	<script type="text/javascript" src="./libraries/jquery.terminal.min.js"></script>
+  <link href="./css/jquery.terminal.css" rel="stylesheet"/>
+
+
+</head>
+
+<body>
+
+	<div id="botForm">
+	  <input id="enterBot" type="text" placeholder="Enter ChatBot Command" size="80" />
+	  <input id="submitToBot" type="button" value="Ask Bot" />
+	  <br>
+	  <input id="enterHash" type="text" placeholder="Enter File Hash" size="80" />
+	  <input id="submitHash" type="button" value="Submit Hash" />
+  </div>
+
+	<input id="chatBox" type="button" value="ChatBox" />
+  <div id="chatbotCLI"></div>
+
+	<div id="myFileTableframe">
+
+					<table id = "reportTable" align="center" border = "1" width=100%>
+						<th>Name</th>
+						<th>Size</th>
+						<th>Type</th>
+						<th>Hash</th>
+
+						<tr id="tableRow">
+							<td id="fileName"></td>
+							<td id="fileSize"></td>
+							<td id="fileType"></td>
+							<td id="fileHash"></td>
+						</tr>
+
+					</table>
+					<input id="hideTable" type="button" value="Hide Table" />
+
+	</div>
+		<div id="displayResult"></div>
+
+
+	</body>
+	</html>

@@ -1,0 +1,9 @@
+{
+  "name": "Test Aplication",
+  "version": "0.0.0",
+  "main": "main.js",
+  "dependencies": {
+    "electron": "^1.4.4",
+    "node-wit": "^4.1.0"
+  }
+}
